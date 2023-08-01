@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngongon</title>
+    <link rel="stylesheet" href="sanpham.css">
+    <link rel="shortcut icon" href="https://img.icons8.com/?size=512&id=82493&format=png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header>
+        <div class="logo"><a href="index.html"><img src="./image/banner/logo2.png">
+                <h1>Ngongon</h1>
+            </a></div>
+        <ul id='center-nav'>
+            <li><a href="index.html" class="links">Trang chủ</a></li>
+            <li><a href="sanpham.html" class="links">Sản phẩm</a></li>
+            <li><a href="#" class="links">Nguồn Gốc</a></li>
+        </ul>
+        <div id='right-nav'>
+            <a href="#" class="links" id="cart-btn">Giỏ hàng</a>
+            <button onclick="loginbtn()" id='login-btn' class="fa-solid fa-user"></button>
+        </div>
+        <div class="toggle-menu">
+            <button onclick="toggle()" id='toggle-btn'><i class="fa-solid fa-bars"></i></button>
+            <ul id="dropdown-menu">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="sanpham.html">Sản Phẩm</a></li>
+                <li><a href="#">Nguồn Gốc</a></li>
+                <li><a href="#" class="action-btn">Giỏ hàng</a></li>
+                <li><a href="login.html">Đăng nhập</a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="form-field" id="form">
+            <input type="text" class="form-input" value="" id="search" placeholder=" " onkeyup="researchbtn()">
+            <label for="name" class="form-label">Tìm Kiếm Sản Phẩm</label>
+            <button type="button" id="research" onclick="reloadsearch()" class="fa-solid fa-xmark"></button>
+            <button type="button" onclick="search()" id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
+        <div id="products-item">
+        </div>
+        <h1 id="cantsearch">Không Tìm Thấy</h1>
+    </main>
+   
+    <script>
+        const sanpham = [
+        {
+        name: "Gà Giòn 1 Miếng",
+        price: "30.000đ",
+        image: "./image/garan/garan1.png",
+        id: 1,
+    },
+    {
+        name: "Cơm Gà Giòn (1 Miếng Gà, Cơm, Xà Lách)",
+        price: "45.000đ",
+        image: "./image/garan/garan2.png",
+        id: 2,
+    },
+    {
+        name: "Gà Giòn 2 Miếng",
+        price: "60.000đ",
+        image: "./image/garan/garan3.png",
+        id: 3,
+    },
+    {
+        name: "Gà Giòn 4 Miếng",
+        price: "120.000đ",
+        image: "./image/garan/garan4.png",
+        id: 4,
+    },
+    {
+        name: "Gà Giòn 6 Miếng",
+        price: "180.000đ",
+        image: "./image/garan/garan5.png",
+        id: 5,
+    },
+    {
+        name: "Gà Giòn Vui Vẻ (2 Miếng Gà, Khoai Tây, Nước Ngọt)",
+        price: "85.000đ",
+        image: "./image/garan/garan6.png",
+        id: 6,
+    },
+    {
+        name: "Cơm Gà Giòn (1 Miếng Gà, Cơm, Xà Lách, Nước Ngọt)",
+        price: "58.000đ",
+        image: "./image/garan/garan7.png",
+        id: 7,
+    },
+    {
+        name: "Gà Giòn Vui Vẻ (1 Miếng Gà, Khoai Tây, Nước Ngọt",
+        price: "55.000đ",
+        image: "./image/garan/garan8.png",
+        id: 8,
+    },
+    {
+        name: "Cơm Gà Cay (1 Miếng Gà Cay, Cơm)",
+        price: "50,000đ",
+        image:"./image/garan/garan9.png",
+        id: 9,
+    },
+    {
+        name: "Gà Cay 2 Miếng",
+        price: "70.000đ",
+        image: "./image/garan/garan10.png",
+        id: 10,
+    },
+    {
+        name: "Gà Cay Vui Vẻ (2 Miếng Gà Cay, Khoai Tây, Nước Ngọt)",
+        price: "95.000đ",
+        image: "./image/garan/garan11.png",
+        id: 11,
+    },
+    {
+        name: "Cơm Gà Cay (1 Miếng Gà Cay, Cơm, Nước Ngọt",
+        price: "60.000đ",
+        image: "./image/garan/garan12.png",
+        id: 12,
+    },
+    {
+        name: "Gà Cay Vui Vẻ (1 Miếng Gà Cay, Khoai Tây, Nước Ngọt",
+        price: "60.000đ",
+        image: "./image/garan/garan13.png",
+        id: 13,
+    },
+    {
+        name: "Gà Cay 1 Miếng",
+        price: "35.000đ",
+        image: "./image/garan/garan14.png",
+        id: 14,
+    },
+    {
+        name: "Burger Gà Giòn (Burger Gà, Nước Ngọt)",
+        price: "40.000đ",
+        image: "./image/burger/burger1.png",
+        id: 15,
+    },
+    {
+        name: "Burger Gà Giòn",
+        price: "30.000đ",
+        image: "./image/burger/burger2.png",
+        id: 16,
+    },
+    {
+        name: "Burger Gà Giòn (Burger Gà, Khoai Tây, Nước Ngọt)",
+        price: "50.000đ",
+        image: "./image/burger/burger3.png",
+        id: 17,
+    },
+    {
+        name: "Mì Ý Vui Vẻ (Mì Ý Sốt Bò, 1 Miếng Gà Giòn, Nước Ngọt)",
+        price: "70.000đ",
+        image: "./image/spaghetti/spaghetti1.png",
+        id: 18,
+    },
+    {
+        name: "Mì Ý Vui Vẻ (Mì Ý Sốt Bò, 2 Gà Không Xương, Khoai Tây, Nước Ngọt)",
+        price: "90.000đ",
+        image: "./image/spaghetti/spaghetti2.png",
+        id: 19,
+    },
+    {
+        name: "Mì Ý Vui Vẻ (Mì Ý Sốt Bò, 2 Gà Không Xương, Nước Ngọt)",
+        price: "80.000đ",
+        image: "./image/spaghetti/spaghetti3.png",
+        id: 20,
+    },
+    {
+        name: "Mì Ý Vui Vẻ (Mì Ý Sốt Bò, Nước Ngọt)",
+        price: "55.000",
+        image: "./image/spaghetti/spaghetti4.png",
+        id: 21,
+    },
+    {
+        name: "Mì Ý Vui Vẻ (1 Miếng Gà Giòn, Mì Ý Sốt Bò, Nước Ngọt)",
+        price: "80.000",
+        image: "./image/spaghetti/spaghetti5.png",
+        id: 22,
+    },
+    {
+        name: "Mì Ý Vui Vẻ (1 Miếng Gà Giòn, Mì Ý Sốt Bò, Nước Ngọt, Khoai Tây)",
+        price: "100.000",
+        image: "./image/spaghetti/spaghetti6.png",
+        id: 23,
+    },
+    {
+        name: "Mì Ý Vui Vẻ (1 Miếng Gà Giòn, Mì Ý Sốt Bò, Nước Ngọt, Khoai Tây)",
+        price: "70.000",
+        image: "./image/spaghetti/spaghetti7.png",
+        id: 24,
+    },
+    {
+        name: "Mì Ý Vui Vẻ (Mì Ý Xúc Xích, Nước Ngọt, Khoai Tây)",
+        price: "60.000đ",
+        image: "./image/spaghetti/spaghetti8.png",
+        id: 25,
+    },
+    {
+        name: "Mì Ý Vui Vẻ (Mì Ý Xúc Xích, Nước Ngọt)",
+        price: "45.000đ",
+        image: "./image/spaghetti/spaghetti9.png",
+        id: 26,
+    },
+    {
+        name: "Mì Ý Vui Vẻ (Mì ý Xúc Xích)",
+        price: "35.000đ",
+        image: "./image/spaghetti/spaghetti10.png",
+        id: 27,
+    },
+    {
+        name: "Pepsi (vừa)",
+        price: "12.000đ",
+        image: "./image/douong/douong1.png",
+        id: 28,
+    },
+    {
+        name: "Pepsi (lớn)",
+        price: "17.00đ",
+        image: "./image/douong/douong2.png",
+        id: 29,
+    },
+    {
+         name: "7 Up (vừa)",
+         price: "12.000đ",
+         image: "./image/douong/douong3.png",
+         id: 30,
+    },
+    {
+        name: "7 Up (lớn)",
+        price: "17.000đ",
+        image: "./image/douong/douong4.png",
+        id: 31,
+    },
+    {
+        name: "Mirinda (vừa)",
+        price: "12.000đ",
+        image: "./image/douong/douong5.png",
+        id: 32,
+    },
+    {
+        name: "Mirinda (lớn)",
+        price: "17.000đ",
+        image: "./image/douong/douong6.png",
+        id: 33,
+    },
+    {
+        name: "Trà Đào (vừa)",
+        price: "12.000đ",
+        image: "./image/douong/douong7.png",
+        id: 34,
+    },
+    {
+        name: "Trà Đào (lớn)",
+        price: "17.000đ",
+        image: "./image/douong/douong8.png",
+        id: 35,
+    },
+    {
+        name: "Nước Suối",
+        price: "5.000đ",
+        image: "./image/douong/douong9.png",
+        id: 36,
+    }
+            
+        ];
+
+        function displayProducts(products) {
+            let productContainer = document.getElementById("products-item");
+            let cantSearchElement = document.getElementById("cantsearch");
+
+            productContainer.innerHTML = ""; // Clear existing products
+
+            if (products.length === 0) {
+                cantSearchElement.style.display = "block";
+            } else {
+                cantSearchElement.style.display = "none";
+
+                for (let product of products) {
+                    let card = `
+                        <div class="card" name="card" id="sp${product.id}">
+                            <div class="image-container">
+                                <img src="${product.image}" />
+                            </div>
+                            <div class="container">
+                                <div class="product-name">
+                                    <h4>${product.name}</h4>
+                                    <h5>${product.name}</h5>
+                                    <h6>${product.price}</h6>
+                                </div>
+                                <div clas="action-btn">
+                                <button class="mua_hang" onclick="addToCart(${product.id})">Đặt Hàng</button>
+                                </div>
+                            </div>
+                        </div>`;
+
+                    productContainer.innerHTML += card;
+                }
+            }
+        }
+
+        function search() {
+            let searchTerm = document.getElementById("search").value.toLowerCase();
+            let filteredProducts = sanpham.filter(
+                (product) =>
+                    product.name.toLowerCase().includes(searchTerm) ||
+                    product.price.toLowerCase().includes(searchTerm)
+            );
+
+            displayProducts(filteredProducts);
+        }
+
+        function resetSearch() {
+            let searchInput = document.getElementById("search");
+            let resetBtn = document.getElementById("research");
+
+            if (searchInput.value === "") {
+                resetBtn.classList.remove("fa-solid", "fa-xmark");
+            } else {
+                resetBtn.classList.add("fa-solid", "fa-xmark");
+            }
+        }
+
+        function reloadsearch() {
+            document.getElementById("search").value = "";
+            resetSearch();
+            displayProducts(sanpham);
+        }
+
+        displayProducts(sanpham);
+    </script>
+</body>
+
+</html>

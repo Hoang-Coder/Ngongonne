@@ -1,0 +1,561 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: 'Quicksand', 'Nunito';
+}
+
+body {
+    background: #f2f2f2;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 7%
+}
+
+::-webkit-scrollbar {
+    width: 0
+}
+
+.logo>a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo>a>h1 {
+    font-size: 23px;
+    font-family: 'Quicksand';
+    font-weight: 400;
+    margin: 10px 0 0 10px;
+}
+
+.logo>a>img {
+    width: 50px;
+    top: 3px
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+#center-nav>li {
+    display: inline-block;
+    padding: 10px
+}
+
+#right-nav {
+    display: inline-block;
+}
+
+#login-btn {
+    margin-left: 10px;
+    background-color: #000;
+    color: #fff;
+    padding: 10px 11px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer
+}
+
+#login-btn:hover {
+    animation: shake .5s;
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(0);
+    }
+
+    25% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(-10deg)
+    }
+
+    75% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(10deg);
+    }
+}
+
+.toggle-menu {
+    display: none;
+    font-size: 20px;
+}
+
+#toggle-btn {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #000
+}
+
+#dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 5%;
+    left: 5%;
+    top: 85px;
+    width: 90%;
+    text-align: center;
+    z-index: 2;
+    backdrop-filter: blur(100px);
+    box-shadow: 0 0 10px -3px #00000093;
+    background: #ffffffd2;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#dropdown-menu>li {
+    transition: all .1s;
+}
+
+#dropdown-menu>li>a {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    color: #333333;
+}
+
+.line-effect {
+    width: 0;
+    height: 2px;
+    background: #3d6ef7;
+    position: fixed;
+    pointer-events: none;
+    transition: all 0.25s ease-out
+}
+
+main {
+    min-height: 600px;
+}
+
+#tablebody {
+    display: grid;
+    padding: 30px 300px;
+    grid-template-columns: 1fr;
+}
+
+.cart_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e5e9ea;
+    flex-direction: row;
+    user-select: none;
+    margin-bottom: 25px;
+    padding: 10px 15px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px -5px #2c2c2c8c;
+}
+
+.cart_item .thongtinsanpham {
+    display: flex;
+    align-items: center;
+}
+
+.cart_item .thongtinsanpham img {
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    border-radius: 100px;
+    margin-right: 15px;
+    box-shadow: 0 0 10px -7px #000;
+}
+.cart_item .thongtinsanpham .tensanpham .tien {
+    display: inline-block;
+}
+.cart_item .thongtinsanpham .tensanpham p {
+    display: inline-block;
+}
+
+.cart_item .function_button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cart_item .function_button .delsp {
+    margin-left: 20px;
+    outline: none;
+    background: transparent;
+    text-align: center;
+    border: none;
+    font-size: 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all .2s .3s, transform .25s, box-shadow .1s .25s;
+}
+
+.cart_item .function_button .delsp:focus {
+    transform: scale(0.95);
+}
+
+.cart_item .function_button .delsp:hover {
+    padding: 2px 5px;
+    transform: rotate(180deg);
+    box-shadow: 0 0 5px #00000070;
+    background: #d34333;
+    color: #fff
+}
+
+.cart_item .function_button h5 {
+    padding: 5px 0 5px 5px;
+    text-align: right;
+    min-width: 70px;
+    display: inline-block;
+}
+.cart_item .function_button p {
+    display: inline-block;
+}
+
+.cart_item .function_button .quanlity_button {
+    text-align: center;
+    margin-right: 10px;
+}
+
+.cart_item .function_button .quanlity_button button {
+    background: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px 4px;
+    margin: 0 5px;
+    transition: all .25s ease-in;
+}
+
+.cart_item .function_button .quanlity_button button:hover {
+    background: #c2c2c2;
+    border-radius: 20px;
+}
+
+.thongtintk {
+    display: block;
+    text-align: center;
+    justify-content: center;
+    width: 30%;
+    height: 42%;
+    background: #ffffff;
+    position: fixed;
+    top: 28%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 40px 0;
+    overflow: hidden;
+    z-index: 15;
+    box-shadow: 0 0 30px #00000050;
+    border-radius: 15px;
+    transition: all .35s;
+}
+
+.thongtintk:hover {
+    top: 25%;
+    height: 52%;
+}
+
+.thongtintk img {
+    width: 150px;
+    height: 150px
+}
+
+.thongtintk h1 {
+    margin-bottom: 20px;
+}
+
+.thongtintk button:nth-child(1) {
+    position: absolute;
+    outline: none;
+    background: transparent;
+    border: none;
+    top: 20px;
+    right: 25px;
+}
+
+.thongtintk button:nth-child(1) i {
+    font-size: medium;
+}
+
+.thongtintk #logout {
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: red;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+    background: #e62222;
+    margin: 0 auto
+}
+
+.thongtintk #logout,
+.thongtintk #logout span {
+    transition: 200ms;
+}
+
+.thongtintk #logout .text {
+    transform: translateX(35px);
+    color: white;
+    font-weight: bold;
+}
+
+.thongtintk #logout .icon {
+    position: absolute;
+    border-left: 1px solid #c41b1b;
+    transform: translateX(110px);
+    height: 30px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thongtintk #logout svg {
+    width: 15px;
+    fill: #eee;
+}
+
+.thongtintk #logout:hover {
+    background: #ff3636;
+}
+
+.thongtintk #logout:hover .text {
+    color: transparent;
+}
+
+.thongtintk #logout:hover .icon {
+    width: 150px;
+    border-left: none;
+    transform: translateX(0);
+}
+
+.thongtintk #logout:focus {
+    outline: none;
+}
+
+.thongtintk #logout:active .icon svg {
+    transform: scale(0.8);
+}
+
+body>main>#dathang {
+    outline: none;
+    border: none;
+    width: fit-content;
+    margin: 0 auto;
+
+}
+
+.button {
+    all: unset;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0.5em 2em;
+    border: mediumspringgreen solid 0.15em;
+    border-radius: 0.25em;
+    /* color: mediumspringgreen; */
+    color: #505050;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border 300ms, color 300ms;
+    user-select: none;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 15px -7px #00000080
+}
+
+.button p {
+    z-index: 1;
+}
+
+.button:hover {
+    /* color: #212121; */
+    color: #fff
+}
+
+.button:active {
+    border-color: teal;
+}
+
+.button::after,
+.button::before {
+    content: "";
+    position: absolute;
+    width: 9.1em;
+    aspect-ratio: 1;
+    background: mediumspringgreen;
+    opacity: 50%;
+    border-radius: 100px;
+    height: 60px;
+    transition: transform 500ms, background 300ms;
+}
+
+.button::before {
+    left: 0;
+    transform: translateX(-8em);
+}
+
+.button::after {
+    right: 0;
+    transform: translateX(8em);
+}
+
+.button:hover:before {
+    transform: translateX(-1em);
+}
+
+.button:hover:after {
+    transform: translateX(1em);
+}
+
+.button:active:before,
+.button:active:after {
+    background: teal;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    background: #1b1f20;
+    box-shadow: 0px 7px 29px 0px #64646f33;
+    color: #fff
+}
+
+footer>ul>li {
+    display: inline-block;
+    text-decoration: none;
+}
+
+footer>ul>li>button {
+    padding: 5px;
+    font-size: x-large;
+    background: transparent;
+    outline: none;
+    border: none;
+    margin: 10px 15px;
+    color: #b3b3b3;
+    transition: all .1s;
+    cursor: pointer
+}
+
+footer>ul>li>button:hover {
+    color: #f7f7f7
+}
+
+#dropdown-menu>li:hover {
+    background-color: #6a5af9;
+}
+
+#dropdown-menu>li:hover>a {
+    color: #eee;
+}
+
+main>#information {
+    margin-bottom: 30px;
+    height: 250px;
+    text-align: center;
+}
+#information > h1 {
+    margin-bottom: 20px;
+}
+main>#information>input {
+    margin-top: 30px;
+    padding: 12px 20px;
+    min-width: 200px;
+    outline: none;
+    border: none;
+    margin: 15px 20px 0;
+    border-radius: 10px;
+    transition: all .1s;
+    box-shadow: 0 0 10px -5px #00000060;
+    border: 2px solid #fff;
+}
+
+main>#information>input:active {
+    transform: scale(0.9);
+}
+
+main>#information>input:focus {
+    border: 1px solid #565656;
+}
+main > #bill {
+    display: flex;
+    justify-content: space-around;
+    /* background: gray; */
+    padding: 15px 50px;
+}
+
+@media only screen and (max-width: 1920px) {
+    main {
+        min-height: 900px;
+    }
+}
+
+@media only screen and (max-width: 1366px) {
+    main {
+        min-height: 600px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .logo>a>h1 {
+        font-size: 20px;
+        font-weight: 900;
+    }
+
+    #center-nav,
+    #right-nav {
+        display: none
+    }
+
+    .logo {
+        font-size: 20px
+    }
+
+    .toggle-menu {
+        display: block;
+    }
+    #tablebody {
+        padding: 0;
+    }
+    .cart_item {
+        width: 88%;
+        margin: 20px auto
+    }
+    .cart_item .thongtinsanpham h3 {
+        font-size: medium;
+    }
+    #information > input {
+        width: 60%
+    }
+    footer {
+        transform: translateY(100px);
+    }
+}

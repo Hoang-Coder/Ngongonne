@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngongon</title>
+    <link rel="stylesheet" href="sanpham.css">
+    <link rel="shortcut icon" href="https://img.icons8.com/?size=512&id=82493&format=png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+
+<body>
+    <header>
+        <div class="logo"><a href="index.html"><img src="./image/banner/logo2.png">
+                <h1>Ngongon</h1>
+            </a></div>
+        <ul id='center-nav'>
+            <li><a href="index.html" class="links">Trang chủ</a></li>
+            <li><a href="sanpham.html" class="links">Sản phẩm</a></li>
+            <li><a href="#footer" class="links">Liên Hệ</a></li>
+        </ul>
+        <div id='right-nav'>
+            <a href="cart.html" class="links" id="cart-btn">Giỏ hàng</a>
+            <button onclick="loginbtn2()" id='login-btn' class="fa-solid fa-user"></button>
+        </div>
+        <div class="toggle-menu">
+            <button onclick="toggle()" id='toggle-btn'><i class="fa-solid fa-bars"></i></button>
+            <ul id="dropdown-menu">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="sanpham.html">Sản Phẩm</a></li>
+                <li><a href="#footer">Liên Hệ</a></li>
+                <li><a href="cart.html" class="action-btn">Giỏ hàng</a></li>
+                <li><a><div onclick="loginbtn2()">Đăng nhập</div></a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <h1>Sản Phẩm Mới</h1>
+            <div class="form-field" id="form">
+                <input type="text" class="form-input" value="" id="search" placeholder=" " onkeyup="researchbtn()">
+                <label for="name" class="form-label">Tìm Kiếm Sản Phẩm</label>
+                <button type="button" id="research" onclick="reloadsearch()" class="fa-solid fa-xmark"></button>
+                <button type="button" onclick="search()"  id="search-btn"><i class="fa-solid  fa-magnifying-glass"></i></button>
+            </div>
+        <div id="products-item"></div>
+        <h1 id="cantsearch">Không Tìm Thấy</h1>
+    </main>
+    <div id="nofitication">
+        <img src="https://img.icons8.com/?size=512&id=63262&format=png">
+        <h2>Thông Báo</h2>
+        <p>Thêm Sản Phẩm Thành Công</p>
+        <button onclick="document.getElementById('nofitication').style.opacity = '0'; let thoigian = setTimeout(function andi() {document.getElementById('nofitication').style.display = 'none'}, 100)">Bỏ Qua</button>
+    </div>
+    <footer id="footer">
+        <h1>Ngongon</h1>
+        <ul>
+            <li><button class="fa-solid fa-home" onclick="contact2(1)"></button></li>
+            <li><button class="fa-brands fa-github" onclick="contact2(2)"></button></li>
+            <li><button class="fa-brands fa-facebook" onclick="contact2(3)"></button></li>
+            <li><button class="fa-solid fa-envelope" onclick="contact2(4)"></button></li>
+            <li><button class="fa-solid fa-phone" onclick="contact2(5)"></button></li>
+        </ul>
+    </footer>
+    <script src="sanpham.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

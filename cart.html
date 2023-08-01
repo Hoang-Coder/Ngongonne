@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngongon</title>
+    <link rel="stylesheet" href="cart.css">
+    <link rel="shortcut icon" href="https://img.icons8.com/?size=512&id=82493&format=png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="index.html"><img src="./image/banner/logo2.png">
+                <h1>Ngongon</h1>
+            </a></div>
+        <ul id='center-nav'>
+            <li><a href="index.html" class="links">Trang chủ</a></li>
+            <li><a href="sanpham.html" class="links">Sản phẩm</a></li>
+            <li><a href="#" class="links">Liên Hệ</a></li>
+        </ul>
+        <div id='right-nav'>
+            <a href="cart.html" class="links" id="cart-btn">Giỏ hàng</a>
+            <button onclick="loginbtn3()" id='login-btn' class="fa-solid fa-user"></button>
+        </div>
+        <div class="toggle-menu">
+            <button onclick="toggle()" id='toggle-btn'><i class="fa-solid fa-bars"></i></button>
+            <ul id="dropdown-menu">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="sanpham.html">Sản Phẩm</a></li>
+                <li><a href="#footer">Liên Hệ</a></li>
+                <li><a href="cart.html">Giỏ hàng</a></li>
+                <li><a><div onclick="loginbtn3()">Đăng nhập</div></a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div id="tablebody"></div>
+        <div id="bill">
+            <h3>Tổng Tiền</h3>
+            <h3 id="sumit"></h3>
+        </div>
+        <div id="information">
+            <h1>Thông Tin Giao Hàng</h1>
+            <input type="text" id="user_ship" placeholder="Tên Người Dùng">
+            <input type="text" id="phone_ship" placeholder="Số Điện Thoại">
+            <input type="text" id="address_ship" placeholder="Địa Chỉ">
+            <button id="datmua" onclick="dathang()" class="button"><p>Đặt Mua</p></button>
+        </div>
+    </main>
+    
+    <footer id="footer">
+        <h1>Ngongon</h1>
+        <ul>
+            <li><button class="fa-solid fa-home" onclick="contact3(1)"></button></li>
+            <li><button class="fa-brands fa-github" onclick="contact3(2)"></button></li>
+            <li><button class="fa-brands fa-facebook" onclick="contact3(3)"></button></li>
+            <li><button class="fa-solid fa-envelope" onclick="contact3(4)"></button></li>
+            <li><button class="fa-solid fa-phone" onclick="contact3(5)"></button></li>
+        </ul>
+    </footer>
+    <script>
+        // update_noti_cart(); 
+        let user_name = JSON.parse(localStorage.getItem("userAccount_key"))
+        for (let kiemtrataikhoan = 0; kiemtrataikhoan < user_name.acc.length; kiemtrataikhoan++) {
+            let user_name_now = JSON.parse(localStorage.getItem("currentUser"))
+            console.log(user_name.acc[kiemtrataikhoan].name)
+            if (user_name_now[0].name == user_name.acc[kiemtrataikhoan].name) {
+            // let autousername = () => {document.getElementById("user_ship").value  = user_name_now}
+                setTimeout(function autousername() {document.getElementById("user_ship").value = user_name.acc[kiemtrataikhoan].name}, 2500)
+                setTimeout(function autouserphone() {document.getElementById("phone_ship").value = user_name.acc[kiemtrataikhoan].phone}, 3000)
+            }
+        }
+        let userID = 0;
+        let giohang = localStorage.getItem("giohang")
+        ? JSON.parse(localStorage.getItem("giohang"))
+        : [];
+        let cur = localStorage.getItem("currentUser")
+        ? JSON.parse(localStorage.getItem("currentUser"))
+        : [];
+        if (cur.length >0){
+            let userIdCheck = cur[0].id
+            ? cur[0].id
+            : 0;
+            userID = userIdCheck;
+        }    
+        // document.getElementById("user_ship").innerText = 
+        let sanpham2 = JSON.parse(localStorage.getItem("Sanpham"))
+        for (let product of sanpham2) { // Lặp trong products (DATA)
+            for (let sanpham2 of giohang) { // Lặp trong giỏ hàng
+                if (sanpham2.id == product.id && sanpham2.userID == userID) { // ID sản phẩm trong giỏ hàng bằng ID sản phẩm trong DATA
+                    let cart_item = `
+                             <div class="cart_item">
+                                <div class="thongtinsanpham">
+                                    <img src="${product.image}">
+                                    <div class="tensanpham">
+                                        <h3>${product.name}<h3>
+                                        <h5 class="tien">${product.price}</h5><p><strong>đ</strong><p>
+                                    </div>
+                                </div>
+                                <div class="function_button">
+                                    <div class="quanlity_button">
+                                        <button onclick="update_cart(${sanpham2.userID},${sanpham2.id},1)"><i class="fa-solid fa-plus"></i></button>
+                                        <h4>${sanpham2.quantity}<h4>
+                                        <button onclick="update_cart(${sanpham2.userID},${sanpham2.id},-1)"><i class="fa-solid fa-minus"></i></button> 
+                                    </div>
+                                    <span><h5 class="tongsotien tien">${product.price*sanpham2.quantity}</h5><p><strong>đ</strong></p></span>
+                                    <button class="delsp" onclick="delete_cart(${sanpham2.userID},${sanpham2.id})"><i class="fa-solid fa-xmark"></i></button>
+                                </div>
+                            </div> `
+                    document.getElementById("tablebody").innerHTML += cart_item;
+                }
+            }
+        }
+        function delete_cart(userID, productID) { // Function xoá sản phẩm trong giỏ hàng
+            let cart = localStorage.getItem("giohang") //khai báo biến, nếu đã có localStorage thì trả về mảng "giohang" sau khi được ép kiểu json
+                ? JSON.parse(localStorage.getItem("giohang"))
+                : [];// Nếu k có localStorage thì trả về mảng rỗng
+            let existingItem = cart.find((i) =>  i.userID == userID && i.id == productID); // Kiểm gia object có ID giống productID trong mảng "giohang"
+            if (existingItem) { //Nếu có object vừa tìm thì thực hiện:
+                cart1 = cart.filter((item) => item.userID == userID && item.id == productID);
+                cart = cart.filter((item1) => !cart1.includes(item1));               
+            }   
+            
+
+            localStorage.setItem("giohang", JSON.stringify(cart)); // Lưu lại "giohang" trong localStorage
+            update_noti_cart();
+            location.reload(); //Reload lại trang để update dữ liệu
+
+        }                      //24      //+1
+        function update_cart(userID, productID, value) { // Cập nhật số lượng của phần tử có mã là ID với số lượng value
+            let cart = localStorage.getItem("giohang")
+                ? JSON.parse(localStorage.getItem("giohang"))
+                : [];
+            let existingItem = cart.find((item) => item.id == productID && item.userID == userID); // khai báo biến "phần tử tồn tại" 
+            if (existingItem) {
+                if (existingItem.quantity == 1 && value == -1) { // Nếu phần tử đang tìm có số lượng 1 và ta muốn giảm 1 phần tử => phần tử sẽ về 0, k tồn tại
+                    cart1 = cart.filter((item) => item.userID == userID && item.id == productID);
+                    cart = cart.filter((item1) => !cart1.includes(item1));   // Xây dựng giỏ hàng mới với các phần tử mới, khác mã phần tử vừa bỏ đi
+                } else {
+                    existingItem.quantity += value; //  nếu phần tử có số lượng khác 1 (từ 2 trở lên) thì cộng trừ thêm với số lượng mới
+                }
+            }
+            localStorage.setItem("giohang", JSON.stringify(cart));
+            update_noti_cart();
+            location.reload();
+        }
+    </script>
+    <script src="sanpham.js"></script>
+    <script src="cart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="./firebase.js"></script>
+</body>
+</html>

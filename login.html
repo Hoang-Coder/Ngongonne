@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngongon</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="shortcut icon" href="https://img.icons8.com/?size=512&id=82493&format=png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header>
+        <div class="logo"><a href="index.html"><img src="./image/banner/logo2.png">
+                <h1>Ngongon</h1>
+            </a></div>
+        <ul id='center-nav'>
+            <li><a href="index.html" class="links">Trang chủ</a></li>
+            <li><a href="sanpham.html" class="links">Sản phẩm</a></li>
+            <li><a href="#" class="links">Liên Hệ</a></li>
+        </ul>
+        <div id='right-nav'>
+            <a href="cart.html" class="links" id="cart-btn">Giỏ hàng</a>
+            <button onclick="loginbtn()" id='login-btn' class="fa-solid fa-user"></button>
+        </div>
+        <div class="toggle-menu">
+            <button onclick="toggle()" id='toggle-btn'><i class="fa-solid fa-bars"></i></button>
+            <ul id="dropdown-menu">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="sanpham.html">Sản Phẩm</a></li>
+                <li><a href="#">Nguồn Gốc</a></li>
+                <li><a href="cart.html">Giỏ hàng</a></li>
+                <li><a href="login.html">Đăng nhập</a></li>
+            </ul>
+        </div>
+    </header>
+    <div id="card1">
+        <div class="tools">
+            <div class="circle"><span class="red box"></span></div>
+            <div class="circle"><span class="yellow box"></span></div>
+            <div class="circle"><span class="green box"></span></div>
+        </div>
+        <br>
+        <div class="card-content">
+            <h1>Đăng nhập</h1>
+            <div class="form-field">
+                <input type="text" class="form-input" id="name-log" placeholder=" ">
+                <label for="name" class="form-label">Tên tài khoản</label>
+            </div>
+            <div class="form-field">
+                <input type="password" class="form-input" id="mk-log" placeholder=" ">
+                <label for="name" class="form-label">Mật khẩu</label>
+            </div>
+            <button id="dangnhapbtn" onclick="login()" type="button">Đăng nhập</button>
+            <button class="covert" onclick="covert(0)"><i class="fa-solid fa-angle-down"></i></button>
+        </div>
+    </div>
+    <div id="card2">
+        <div class="tools">
+            <div class="circle"><span class="red box"></span></div>
+            <div class="circle"><span class="yellow box"></span></div>
+            <div class="circle"><span class="green box"></span></div>
+        </div>
+        <br>
+        <div class="card-content2">
+            <h1>Đăng ký</h1>
+            <div class="form-field">
+                <input type="text" class="form-input" id="name" placeholder=" ">
+                <label for="name" class="form-label">Tên tài khoản</label>
+            </div>
+            <div class="form-field">
+                <input type="text" class="form-input" id="mail" placeholder=" ">
+                <label for="name" class="form-label">Email</label>
+            </div>
+            <div class="form-field">
+                <input type="text" class="form-input" id="pn" placeholder=" ">
+                <label for="name" class="form-label">Số điện thoại</label>
+            </div>
+            <div class="form-field">
+                <input type="text" class="form-input" id="mk" placeholder=" ">
+                <label for="name" class="form-label">Mật khẩu</label>
+            </div>
+            <div class="form-field">
+                <input type="text" class="form-input" id="remk" placeholder=" ">
+                <label for="name" class="form-label">Xác nhận mật khẩu</label>
+            </div>
+            <button type="submit" id="dangnhapbtn2" onclick="check_Register()">Đăng Ký</button>
+            <button class="covert" onclick="covert(1)"><i class="fa-solid fa-angle-down"></i></button>
+        </div>
+    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+        import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyBxMC8gkeMdklroSZ69ora12hsIn9Z9cRc",
+            authDomain: "ngongonlogin.firebaseapp.com",
+            projectId: "ngongonlogin",
+            storageBucket: "ngongonlogin.appspot.com",
+            messagingSenderId: "876321874853",
+            appId: "1:876321874853:web:a38f4d1b053103613f3e4c"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app)
+        const auth = getAuth();
+
+        dangnhapbtn2.addEventListener("click", (e) => {
+            let email = document.getElementById("mail").value
+            let password = document.getElementById("mk").value
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    set(ref(database, "users/" + user.uid), {
+                        email: email,
+                        password: password
+                    })
+                    alert("User created")
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage)
+                    // ..
+                });
+
+        })
+        dangnhapbtn.addEventListener("click", (e) => {
+            let email = document.getElementById("mail-log").value
+            let password = document.getElementById("mk-log").value
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    // ...
+                    alert("User logged in!")
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage)
+                });
+        })
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="./firebase.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>
