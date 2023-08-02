@@ -53,7 +53,8 @@ function checktoAddCart(productID) {
             console.log(userID);
         }
     } else {
-        alert("Bạn cần đăng nhập để thêm giỏ hàng!");
+        document.getElementById("error").style.display = "block"
+        let thoigian2 = setTimeout(function andi2() {document.getElementById("error").style.opacity = "1"}, 100)
     }
 
 }
